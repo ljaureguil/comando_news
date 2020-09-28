@@ -6,9 +6,64 @@ background-size:100% auto;
 text-align: center;
 }
 
+
+
+
+#ok{
+    color: transparent;
+   font-family: arial;
+   font-size: 10vw;
+   font-weight: 900;
+   background: #00b8ff;
+   -webkit-background-clip: text;
+   -webkit-text-stroke: 0.5vw black;
+   filter: drop-shadow(0 5px 4px black);
+   animation: rock 2s ease-in-out infinite;
+}
+#ok::after {News
+   content: "Perspective!";
+   z-index: 2;
+   position: absolute;
+   left: 0;
+   -webkit-text-stroke: 0.5vw black;
+   background: radial-gradient(
+      circle at 0 50%,
+      transparent 40%,
+      rgba(255, 255, 255, 0.5),
+      transparent 60%
+   );
+   -webkit-background-clip: text;
+   animation: shine 2s ease-in-out infinite;
+}
+
+
+@keyframes rock {
+   0% {
+      transform: perspective(500px) rotateY(20deg);
+   }
+   50% {
+      transform: perspective(500px) rotateY(-20deg);
+   }
+   100% {
+      transform: perspective(500px) rotateY(20deg);
+   }
+}
+@keyframes shine {
+   0% {
+      background-position: -250px;
+   }
+   50% {
+      background-position: 250px;
+   }
+   100% {
+      background-position: -250px;
+   }
+}
+
+
 </style>
 
-<button id="ok" onclick="alert('ok, ready for news')" style="background: rgba(red, green, blue, .5);">News</button>
+<button id="ok" onclick="alert('ok, good news are coming...')" >News</button>
 
 <script>
 
