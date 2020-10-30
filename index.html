@@ -215,7 +215,7 @@ function bestFit(cont, e) {
  //arim.push(e);
 }
  var record=0;
-back();
+setTimeout("back();",20000);
 //// Facebook page go get video
 
 function back(){
@@ -223,7 +223,7 @@ function back(){
   record--;
   if(record<0) record=arim.length-1;
     arim[record].style.opacity=1;arim[record].style.zIndex=1;
- 
+ alert(record)
 }
 
 function next(){
@@ -232,7 +232,7 @@ function next(){
   record++;
   if(record===arim.length) record=0;
   arim[record].style.opacity=1;arim[record].style.zIndex=1;
- 
+ alert(record)
 }
 
 function loadDoc(url,callback) {
