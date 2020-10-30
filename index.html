@@ -1,17 +1,20 @@
-
 <html>
 
 
 <style>
+#todo{
+    width:100%;
+    height:100%;
+}
 /* Container */
 
 .wrapper {
  // width: 800px;
  // max-width: 100%;
  // margin: auto;
- height:100%;
- width:100%;
-  overflow: hidden;
+ //height:100%;
+// width:100%;
+//  overflow: hidden;
 }
 
 .carousel {
@@ -43,22 +46,35 @@
   display: block;
    z-index: 0;
   opacity:0;
- // max-width:100%;
-  height:100%;
-
+  //max-width:100%;
+  //max-height:100%;
+ // object-fit: contain;
 }
+.cvf{ 
+    position:absolute; //opacity:0;
+ -webkit-transition: opacity ease-out 0.5s;
+  transition: opacity ease-out 0.5s;
+/  -webkit-transition: opacity ease-out 0.5s;
+  transition: opacity ease-out 0.5s;
+ 
+ // object-fit: contain;
+ 
+}
+
 
 .carousel-arrow {
   z-index: 3;
   display: block;
   position: absolute;
-  width: 36px;
-  height: 36px;
-  top: 50%;
+  width: 30px;
+  height: 30px;
+  top: 20%;
   margin-top: -18px;
   border-radius: 50%;
-  border: 0;
-  background-color: #fff;
+  //border: 0;
+  border-style:solid;
+  border-color:red;
+  //background-color: rgba(red, green, blue, .4);
   background-image: url("http://res.cloudinary.com/dnqehhgmu/image/upload/v1509720334/blue-arrow_jk1ydw.svg");
   background-repeat: no-repeat;
   background-position: center;
@@ -66,6 +82,7 @@
   cursor: pointer;
   -webkit-transition: background-size 0.15s ease-out;
   transition: background-size 0.15s ease-out;
+  opacity: .5;
 }
 
 .carousel-arrow:hover,
@@ -84,9 +101,12 @@
   transform: rotateZ(180deg);
 }
 #swimgs{
- // width: 100%;
- // height:100%;
+  width: 100%;
+  height:100%;
+  background:blue;
  // text-align: center;
+ width:100%;
+ height:100%;
 }
 #fctemplate{
     
@@ -94,67 +114,107 @@
 </style>
  <body>
 
-    <div id="todo" class="wrapper">
-
-        <div class="carousel">
-      
-          <button type="button" id="carousel-arrow-prev" class="carousel-arrow carousel-arrow-prev" arial-label="Image précédente" onclick="back()"></button>
+      <button type="button" id="carousel-arrow-prev" class="carousel-arrow carousel-arrow-prev" arial-label="Image précédente" onclick="back()"></button>
           <button type="button" id="carousel-arrow-next" class="carousel-arrow carousel-arrow-next" arial-label="Image suivante" onclick="next()"></button>
 
-  
-      <div id="swimgs">  </div>
-   
-        </div>
-      
+      <div id="swimgs">    
       </div>
-  
+
 <script>
 
+    var w = window.innerWidth;//cont.offsetWidth; //
+    var h = window.innerHeight;//cont.offsetHeight; //
+    esw=document.getElementById("swimgs");
 var arlinks=[];
 var arim=[];
+var w = esw.offsetWidth;//window.innerWidth;//
+var h = esw.offsetHeight;//window.innerHeight;//
+var ro=w/h;
 
-     ecar=document.getElementById("todo");
-    esw=document.getElementById("swimgs");
  /////////////////////////////////////////////////
-loadDoc("https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/newslinks.txt",function(r){
-     arlinks=r.split("\n"); //alert(arlinks);
-    arlinks.forEach(function(item,index){
-      var con=document.createElement("div");
-     con.setAttribute("class","cimg carousel-img")
-      var content="";
-      //
-          if(item.includes("iframe") ){
-            var wi=item.split('width="');wi=1*wi[1].slice(0,wi[1].indexOf('"'));//alert(wi)
-            var hi=item.split('height="');hi=1*hi[1].slice(0,hi[1].indexOf('"'));//alert(hi)
-            var rad=hi/wi;
-            var  y=ecar.clientHeight, x=y/rad;
-            var item=item.replace('width="'+wi+'" height="'+hi+'"','width="'+x+'" height="'+y+'"');
-             
+loadDoc("https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/newslinks.txt", function(r) {
+    arlinks = r.split("\n"); //alert(arlinks);
+    arlinks.forEach(function(item, index) {
+        var con = document.createElement("div");
+        con.setAttribute("class", "cvf");//cimg carousel-img
+        var content = "";
+        //
+        if (item.includes("iframe")) {
+   /*         var wi = item.split('width="');
+            wi = 1 * wi[1].slice(0, wi[1].indexOf('"')); //alert(wi)
+            var hi = item.split('height="');
+            hi = 1 * hi[1].slice(0, hi[1].indexOf('"')); //alert(hi)
+            var rad = hi / wi;         
+            
+            ////////////
+            var y = esw.clientHeight,
+                x = y * wi / hi;
+                
+       var ra = w / wi;
+    ra = w / wi;
+    var hh = hi * ra,
+        ww = wi * ra;
+    if (hh > h) {
+        ra = h / hi;
+        ww = wi * ra;
+        hh = hi * ra;
+    }*/
+ 
+ //      item=item.replace('width="'+wi+'" height="'+hi+'"','width="'+ww+'" height="'+hh+'"');
+              
+  //   alert("\n w= "+w +"\nh = "+h +"\nwe = "+ we+"\n he= "+he +"\nww = "+ww +"\nhh = "+ hh)
+               
+                
+                
+                
+                
+////////////////////////////          item = item.replace('<iframe', '<iframe id="ifr_' + index + '" class="cimg carousel-img"  onload=bestFit(esw,this)');//class="cvf"  onload=bestFit(esw,this)
 
+           item = item.replace('<iframe', '<iframe id="ifr_' + index + '"class="cvf"  onload=bestFit(esw,this)');//class="cvf"  onload=bestFit(esw,this)
+//alert(item);
+      //      item = item.replace('width="' + wi + '" height="' + hi + '"', '');
+            con.innerHTML += item;
+         //   alert(con.innerHTML)
+         var id="ifr_"+index;
+             esw.appendChild(con);
+             arim.push(con);
+        }
+        if (item.includes("https://scontent-")) {
+            var im = document.createElement("img");
+            im.src = item;
+            esw.appendChild(im);
+            im.onload=function(){
+             //   var ri=im.naturalWidth/im.naturalHeight;
+   im.setAttribute("class", "cimg carousel-img"); //mg carousel-img'>")
+   bestFit(esw,im)
+ 
+            arim.push(im);
+                    }
+        }
+    })
+});
+function bestFit(cont, e) {
+ //   alert(e.width);
 
-  
-        con.innerHTML=item;
-        esw.appendChild(con);
-       arim.push(con);
-      // alert(ecar.style.width)
-       con.style.left=.7*(esw.clientWidth-wi)/4+"px";//offset
-      alert(esw.clientWidth+"\n"+wi+"\n"+con.style.left)
-
-         }
-        if(item.includes("https://scontent-")){
-       var im=document.createElement("img");
-            im.src=item;
-            im.setAttribute("class","cimg carousel-img");//mg carousel-img'>")
-         esw.appendChild(im);
-       arim.push(im);
-       //
-       var nw=im.clientWidth*1;
-      var nh=im.clientHeight*1
-       
-      // if(nh<nw) im.style.left=(esw.clientWidth-nw)/4+"px";
-
-          } }) });
- var record=1;
+    var we = e.offsetWidth; //.naturalWidth;
+    var he = e.offsetHeight; //.naturalHeight;//
+    var ra = w / we;
+    ra = w / we;
+    var hh = he * ra,
+        ww = we * ra;
+    if (hh > h) {
+        ra = h / he;
+        ww = we * ra;
+        hh = he * ra;
+    }
+    e.width = ww;
+    e.height = hh;
+    e.style.left=(w-ww)/2;
+    e.style.top=(h-hh)/2
+ //   alert("\n w= "+w +"\nh = "+h +"\nwe = "+ we+"\n he= "+he +"\nww = "+ww +"\nhh = "+ hh)
+ //arim.push(e);
+}
+ var record=0;
 back();
 //// Facebook page go get video
 
