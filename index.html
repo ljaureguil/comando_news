@@ -137,36 +137,18 @@ loadDoc("https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/newsl
     arlinks = r.split("\n"); //alert(arlinks);
     arlinks.forEach(function(item, index) {
         var con = document.createElement("div");
+       
         con.setAttribute("class", "cvf");//cimg carousel-img
         var content = "";
         //
         if (item.includes("iframe")) {
-   /*         var wi = item.split('width="');
-            wi = 1 * wi[1].slice(0, wi[1].indexOf('"')); //alert(wi)
-            var hi = item.split('height="');
-            hi = 1 * hi[1].slice(0, hi[1].indexOf('"')); //alert(hi)
-            var rad = hi / wi;         
-            
-            ////////////
-            var y = esw.clientHeight,
-                x = y * wi / hi;
-                
-       var ra = w / wi;
-    ra = w / wi;
-    var hh = hi * ra,
-        ww = wi * ra;
-    if (hh > h) {
-        ra = h / hi;
-        ww = wi * ra;
-        hh = hi * ra;
-    }*/
- 
+
  //      item=item.replace('width="'+wi+'" height="'+hi+'"','width="'+ww+'" height="'+hh+'"');
               
   //   alert("\n w= "+w +"\nh = "+h +"\nwe = "+ we+"\n he= "+he +"\nww = "+ww +"\nhh = "+ hh)
                
                 
-                
+                    arim.push(con);
                 
                 
 ////////////////////////////          item = item.replace('<iframe', '<iframe id="ifr_' + index + '" class="cimg carousel-img"  onload=bestFit(esw,this)');//class="cvf"  onload=bestFit(esw,this)
@@ -178,10 +160,12 @@ loadDoc("https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/newsl
          //   alert(con.innerHTML)
          var id="ifr_"+index;
              esw.appendChild(con);
-             arim.push(con);
+             con.style.opacity=0;
+          
         }
         if (item.includes("https://scontent-")) {
             var im = document.createElement("img");
+                  arim.push(im);
             im.src = item;
             esw.appendChild(im);
             im.onload=function(){
@@ -189,7 +173,7 @@ loadDoc("https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/newsl
    im.setAttribute("class", "cimg carousel-img"); //mg carousel-img'>")
    bestFit(esw,im)
  
-            arim.push(im);
+      
                     }
         }
     })
@@ -215,8 +199,8 @@ function bestFit(cont, e) {
  //   alert("\n w= "+w +"\nh = "+h +"\nwe = "+ we+"\n he= "+he +"\nww = "+ww +"\nhh = "+ hh)
  //arim.push(e);
 }
- var record=0;
-setTimeout("back();",20000);
+ var record=1;
+setTimeout("back();",2000);
 //// Facebook page go get video
 
 function back(){
@@ -224,7 +208,7 @@ function back(){
   record--;
   if(record<0) record=arim.length-1;
     arim[record].style.opacity=1;arim[record].style.zIndex=1;
-// alert(record)
+ //alert(record)
 }
 
 function next(){
