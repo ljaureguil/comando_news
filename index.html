@@ -2,27 +2,20 @@
 
 
 <style>
+  body{
+   overflow:hidden;
+
+  }
 #todo{
     width:100%;
     height:100%;
+    overflow:hidden;
 }
-/* Container */
-
-.wrapper {
- // width: 800px;
- // max-width: 100%;
- // margin: auto;
- //height:100%;
-// width:100%;
-//  overflow: hidden;
-}
-
 .carousel {
   position: relative;
   width: 100%;
   height: 0;
- // padding-top: 56.25%;
-  background: #ddd;
+   background: #ddd;
 }
 
 /* Images */
@@ -31,24 +24,15 @@
  position: absolute;
   top: 0;
   bottom: 0;
- // left: center;
- // right: 0;
- // max-width: 100%;
-  -webkit-transition: opacity ease-out 0.5s;
+   -webkit-transition: opacity ease-out 0.5s;
   transition: opacity ease-out 0.5s;
+  opacity:0;
 }
-
-
-/* Flèches de défilement */
-
 .cimg{
  
   display: block;
    z-index: 0;
   opacity:0;
-  //max-width:100%;
-  //max-height:100%;
- // object-fit: contain;
 }
 .cvf{ 
     position:absolute; //opacity:0;
@@ -69,13 +53,10 @@
   width: 30px;
   height: 30px;
   top: 20%;
- // margin-top: -18px;
-  border-radius: 50%;
-  //border: 0;
+   border-radius: 50%;
   border-style:solid;
   border-color:red;
-  //background-color: rgba(red, green, blue, .4);
-  background-image: url("http://res.cloudinary.com/dnqehhgmu/image/upload/v1509720334/blue-arrow_jk1ydw.svg");
+   background-image: url("http://res.cloudinary.com/dnqehhgmu/image/upload/v1509720334/blue-arrow_jk1ydw.svg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: 16px 16px;
@@ -125,14 +106,15 @@ background-size:100% 100%;
 
 //    var w = window.screen.availWidth;//window.innerWidth;//cont.offsetWidth; //
 //    var h = window.screen.availHeight//window.innerHeight;//cont.offsetHeight; //
-  //  alert(h+"\n\n"+w);
+  // 
     esw=document.getElementById("swimgs");
 var arlinks=[];
 var arim=[];
-var w = esw.offsetWidth;//window.innerWidth;//
-var h = esw.offsetHeight;//window.innerHeight;//
+var w = window.innerWidth;//esw.offsetWidth;////
+var h = window.innerHeight;//esw.offsetHeight;//
  //  alert(h+"\n\n"+w);
 var ro=w/h;
+ //alert(esw.clientWidth+"\n\n"+w);
 
  /////////////////////////////////////////////////
 loadDoc("https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/newslinks.txt", function(r) {
@@ -167,6 +149,7 @@ loadDoc("https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/newsl
         }
         if (item.includes("https://scontent-")) {
             var im = document.createElement("img");
+            im.style.opacity=0;
                   arim.push(im);
             im.src = item;
             esw.appendChild(im);
