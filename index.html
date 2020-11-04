@@ -223,6 +223,7 @@ var na=n+"@"+r.counter;
 //alert(JSON.stringify(r))
 r.visitas.push({"fecha":n,"name":na});
 r.counter++;
+r.nusers++;
 r.users.push({"user":na,"visitas":[n],"counter":1});
 //alert(JSON.stringify(r))
 
@@ -235,15 +236,34 @@ else{
  //   alert(asw);
     r.visitas.push({"fecha":n,"name":asw});
     r.counter++;
-    for(var i=0;i<r.users.length;i++){
+    var i=0;
+    for(i=0;i<r.users.length;i++){
         if(r.users[i].user===asw){
             r.users[i].visitas.push(n);
-            r.users[i].counter++;
+            r.users[i].counter++; 
+           
             i=r.users.length;
+    
                UpdateJ("https://jsonblob.com/api/e17b5980-1d62-11eb-ab21-2fc49933500c",r)
         }
+  
     }
+      if(i==r.users.length){
+      
+var na=n+"@"+r.counter;
+//alert(na)
+//alert(JSON.stringify(r))
+r.visitas.push({"fecha":n,"name":na});
+r.counter++;
+r.nusers++;
+r.users.push({"user":na,"visitas":[n],"counter":1});
+//alert(JSON.stringify(r))
 
+UpdateJ("https://jsonblob.com/api/e17b5980-1d62-11eb-ab21-2fc49933500c",r);
+r.v
+
+localStorage.setItem("ind",na);
+        }
 
  /* 
 
