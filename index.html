@@ -44,9 +44,15 @@
  // object-fit: contain;
  
 }
+@keyframes atencion { 
+ 
+  from {width:15px; height: 15px}
+  to {width:45px; height: 45px}
 
+}
 
 .carousel-arrow {
+  animation: atencion 2s ease-in-out alternate infinite;
   z-index: 3;
   display: block;
   position: absolute;
@@ -207,69 +213,60 @@ background-size:100% 100%;
 // localStorage.removeItem("ind");
  /////////////
 
- var d = new Date();
-  var n = d.toString();
+  d = new Date();
+   n = d.toString();
+  n=n.split(" GMT")[0];
+ // alert(n)
 var asw=localStorage.getItem("ind");
 
 //setTimeout(function(){
 GetJ("https://jsonblob.com/api/e17b5980-1d62-11eb-ab21-2fc49933500c",function(r){
+var na=n+"-"+r.counter;
+//alert("local... "+asw);
 
-//alert(JSON.stringify(r));
-
- //alert(asw)
-if(asw===null || asw === ""){
-var na=n+"@"+r.counter;
-//alert(na)
-//alert(JSON.stringify(r))
-r.visitas.push({"fecha":n,"name":na});
+if(asw===null){
+//  alert("si... "+asw);
+r.visitas.push({"fecha":na,"name":na});
 r.counter++;
 r.nusers++;
-r.users.push({"user":na,"visitas":[n],"counter":1});
-//alert(JSON.stringify(r))
-
+r.users.push({"user":na,"visitas":[na],"counter":1});
 UpdateJ("https://jsonblob.com/api/e17b5980-1d62-11eb-ab21-2fc49933500c",r);
-r.v
-
 localStorage.setItem("ind",na);
 }
 else{
- //   alert(asw);
-    r.visitas.push({"fecha":n,"name":asw});
+//    var na=n+"-"+r.counter;
+    var c=false;
+ // alert("no "+asw);
+    r.visitas.push({"fecha":na,"name":asw});
     r.counter++;
     var i=0;
     for(i=0;i<r.users.length;i++){
+        
+     //   alert("esto hay... "+r.users[i].user)
         if(r.users[i].user===asw){
-            r.users[i].visitas.push(n);
+          //  alert("si esta registrado... "+r.users[i].user)
+            r.users[i].visitas.push(na);
             r.users[i].counter++; 
            
             i=r.users.length;
-    
+                c=true;
                UpdateJ("https://jsonblob.com/api/e17b5980-1d62-11eb-ab21-2fc49933500c",r)
         }
   
     }
-      if(i==r.users.length){
-      
-var na=n+"@"+r.counter;
-//alert(na)
-//alert(JSON.stringify(r))
-r.visitas.push({"fecha":n,"name":na});
-r.counter++;
+    //chhhhh
+      if(!c){
+ //       alert("si rehacerla "+asw);
+//var na=n+"-"+r.counter;
+//alert(JSON.stringify(r));
+localStorage.removeItem("ind");
 r.nusers++;
-r.users.push({"user":na,"visitas":[n],"counter":1});
-//alert(JSON.stringify(r))
-
+r.users.push({"user":na,"visitas":[na],"counter":1});
+//alert(JSON.stringify(r));
 UpdateJ("https://jsonblob.com/api/e17b5980-1d62-11eb-ab21-2fc49933500c",r);
-r.v
 
 localStorage.setItem("ind",na);
         }
-
- /* 
-
-
-}
-*/
 }
 });
 //},15000);
@@ -382,6 +379,46 @@ callback(xhttp.responseText);
 
 }
 
+</script>
+
+</body>
+</html>
+
+/*
+{
+  "main": {},
+  "visitas": [
+    {
+      "fecha": "Wed Nov 04 2020 20:40:51 GMT-0800 (PST)",
+      "name": "Wed Nov 04 2020 20:40:51 GMT-0800 (PST)@11"
+    },
+    {
+      "fecha": "Wed Nov 04 2020 22:36:42 GMT-0800 (PST)",
+      "name": "Wed Nov 04 2020 22:36:42 GMT-0800 (PST)@13"
+    }],
+  "users": [
+    {
+      "user": "Wed Nov 04 2020 20:40:51 GMT-0800 (PST)@11",
+      "visitas": [
+        "Wed Nov 04 2020 20:40:51 GMT-0800 (PST)"
+      ],
+      "counter": 1
+    },
+    {
+      "user": "Wed Nov 04 2020 22:36:42 GMT-0800 (PST)@13",
+      "visitas": [
+        "Wed Nov 04 2020 22:36:42 GMT-0800 (PST)"
+      ],
+      "counter": 1
+    }
+ 
+  ],
+  "counter": 2,
+  "nusers": 2
+}
+
+
+*/
 </script>
 
 </body>
