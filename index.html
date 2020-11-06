@@ -208,37 +208,41 @@ background-size:100% 100%;
 // main: https://jsonblob.com/e17b5980-1d62-11eb-ab21-2fc49933500c
 //    var w = window.screen.availWidth;//window.innerWidth;//cont.offsetWidth; //
 //    var h = window.screen.availHeight//window.innerHeight;//cont.offsetHeight; //
- 
-
+ var arn="a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,x,y,z,_,0,1,2,3,4,5,6,7,8,9,a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,x,y,z,_,0,1,2,3,4,5,6,7,8,9";
+ arn=arn.split(",");
+//alert(arn.length)
 // localStorage.removeItem("ind");
  /////////////
 
   d = new Date();
    n = d.toString();
+   var nameid=""
   n=n.split(" GMT")[0];
  // alert(n)
 var asw=localStorage.getItem("ind");
-
+//var nn=arn[d.getMonth()*1]+arn[d.getHours()*1]+arn[d.getMinutes()]+arn[d.getSeconds()];
+//alert(nn)
 //setTimeout(function(){
 GetJ("https://jsonblob.com/api/e17b5980-1d62-11eb-ab21-2fc49933500c",function(r){
 var na=n+"-"+r.counter;
 //alert("local... "+asw);
-
+var nn=arn[d.getMonth()*1]+arn[d.getHours()*1]+arn[d.getMinutes()]+arn[d.getSeconds()]+"-"+r.counter;
 if(asw===null){
 //  alert("si... "+asw);
 r.visitas.push({"fecha":na,"name":na});
-r.counter++;
-r.nusers++;
-r.users.push({"user":na,"visitas":[na],"counter":1});
+r.counter=r.visitas.length;
+r.nusers=r.users.length;
+
+r.users.push({"user":nn,"visitas":[na],"counter":1});
 UpdateJ("https://jsonblob.com/api/e17b5980-1d62-11eb-ab21-2fc49933500c",r);
-localStorage.setItem("ind",na);
+localStorage.setItem("ind",nn);
 }
 else{
 //    var na=n+"-"+r.counter;
     var c=false;
  // alert("no "+asw);
     r.visitas.push({"fecha":na,"name":asw});
-    r.counter++;
+    r.counter=r.visitas.length;
     var i=0;
     for(i=0;i<r.users.length;i++){
         
@@ -246,7 +250,7 @@ else{
         if(r.users[i].user===asw){
           //  alert("si esta registrado... "+r.users[i].user)
             r.users[i].visitas.push(na);
-            r.users[i].counter++; 
+            r.users[i].counter=r.users[i].visitas.length; 
            
             i=r.users.length;
                 c=true;
@@ -256,16 +260,14 @@ else{
     }
     //chhhhh
       if(!c){
- //       alert("si rehacerla "+asw);
-//var na=n+"-"+r.counter;
-//alert(JSON.stringify(r));
-localStorage.removeItem("ind");
-r.nusers++;
-r.users.push({"user":na,"visitas":[na],"counter":1});
+ localStorage.removeItem("ind");
+r.nusers=r.users.length;
+
+r.users.push({"user":nn,"visitas":[na],"counter":1});
 //alert(JSON.stringify(r));
 UpdateJ("https://jsonblob.com/api/e17b5980-1d62-11eb-ab21-2fc49933500c",r);
 
-localStorage.setItem("ind",na);
+localStorage.setItem("ind",nn);
         }
 }
 });
@@ -416,7 +418,6 @@ callback(xhttp.responseText);
   "counter": 2,
   "nusers": 2
 }
-
 
 */
 </script>
