@@ -10,6 +10,7 @@
     width:100%;
     height:100%;
     overflow:hidden;
+    text-align:center;
 }
 .carousel {
   position: relative;
@@ -99,6 +100,16 @@ background-size:100% 100%;
 #fctemplate{
     
 }
+.lin{
+background:url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXZA836YyUl7mHqHqIsukrCGIthpEZvHPZ2g&usqp=CAU);
+width:100%;
+height:100%;
+background-size: 100% 100%;
+font-size:50px;
+font-weight: bolder;
+color:white;
+
+}
 </style>
  <body>
 
@@ -150,8 +161,8 @@ background-size:100% 100%;
         //var url = "http://localhost:8080/api/v1/users";
         
         var data = {};
-        data.firstname = "John";
-        data.lastname  = "Snow";
+   //     data.firstname = "John";
+     //   data.lastname  = "Snow";
         var json = JSON.stringify(data);
         
         var xhr = new XMLHttpRequest();
@@ -303,6 +314,24 @@ loadDoc("https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/newsl
      
                     }
         }
+      //  alert(item)
+        if(item.includes("https://ljaureguil.github")){
+         q=document.createElement("a");
+         
+         q.setAttribute("class","cimg carousel-img lin");
+                    q.style.opacity=0;
+                  arim.push(q);
+         
+         q.href=item;
+
+         q.innerHTML="<img src='https://image.flaticon.com/icons/png/512/216/216214.png'>";
+    
+          bestFit(esw,q);
+          esw.appendChild(q);
+          
+          var win = window.open(item, '_blank');
+
+        }
     })
 });
 function bestFit(cont, e) {
@@ -355,7 +384,7 @@ callback(xhttp.responseText);
 </script>
 
 </body>
-</html>
+
 
 /*
 {
@@ -679,5 +708,4 @@ callback(xhttp.responseText);
 */
 </script>
 
-</body>
 </html>
