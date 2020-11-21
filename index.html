@@ -10,6 +10,7 @@
     width:100%;
     height:100%;
     overflow:hidden;
+    text-align:center;
 }
 .carousel {
   position: relative;
@@ -99,16 +100,27 @@ background-size:100% 100%;
 #fctemplate{
     
 }
+.lin{
+background:url(https://image.flaticon.com/icons/png/512/216/216214.png);
+width:100%;
+height:100%;
+background-size: 100% 100%;
+font-size:50px;
+font-weight: bolder;
+color:white;
+
+}
 </style>
  <body>
 
       <button type="button" id="carousel-arrow-prev" class="carousel-arrow carousel-arrow-prev" arial-label="Image précédente" onclick="back()"></button>
           <button type="button" id="carousel-arrow-next" class="carousel-arrow carousel-arrow-next" arial-label="Image suivante" onclick="next()"></button>
 
-      <div id="swimgs">    
+      <div id="swimgs">   
+        <embed id="cal" type="text/html" src=""  width="500" height="200">
       </div>
       <script>
-        // Get all users
+        // Get all users  https://ljaureguil.github.io/Calendario/
        
 
         function GetAllJ(url,callback) {
@@ -150,8 +162,8 @@ background-size:100% 100%;
         //var url = "http://localhost:8080/api/v1/users";
         
         var data = {};
-        data.firstname = "John";
-        data.lastname  = "Snow";
+   //     data.firstname = "John";
+     //   data.lastname  = "Snow";
         var json = JSON.stringify(data);
         
         var xhr = new XMLHttpRequest();
@@ -264,10 +276,14 @@ localStorage.setItem("ind",nn);
 }
 });
     esw=document.getElementById("swimgs");
+       ecal=document.getElementById("cal");
+       ecal.setAttribute("class", "cimg carousel-img");
+ 
 var arlinks=[];
 var arim=[];
 var w = window.innerWidth;//esw.offsetWidth;////
 var h = window.innerHeight;//esw.offsetHeight;//
+
  //  alert(h+"\n\n"+w);
 var ro=w/h;
  //alert(esw.clientWidth+"\n\n"+w);
@@ -303,7 +319,32 @@ loadDoc("https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/newsl
      
                     }
         }
-    })
+      //  alert(item)
+        if(item.includes("https://ljaureguil.github")){
+
+       ecal.setAttribute("src",item)
+       bestFit(esw,ecal);
+       arim.push(ecal)
+        /* q=document.createElement("a");
+         
+         q.setAttribute("class","cimg carousel-img lin");
+                    q.style.opacity=0;
+                  arim.push(q);
+         
+         q.href=item;
+
+         q.innerHTML="AGENDA";
+    
+          bestFit(esw,q);
+          esw.appendChild(q);
+          
+        //  var win = window.open(item, '_blank');
+*/
+        }
+    });
+
+
+
 });
 function bestFit(cont, e) {
     var we = e.offsetWidth; //.naturalWidth;
@@ -355,7 +396,7 @@ callback(xhttp.responseText);
 </script>
 
 </body>
-</html>
+
 
 /*
 {
@@ -679,5 +720,4 @@ callback(xhttp.responseText);
 */
 </script>
 
-</body>
 </html>
