@@ -229,7 +229,8 @@ color:white;
   d = new Date();
    n = d.toString();
    var nameid=""
-  n=n.split(" GMT")[0];
+ // n=n.split(" GMT")[0];
+  n=d;
  // alert(n)
 var asw=localStorage.getItem("ind");
 
@@ -237,6 +238,7 @@ GetJ("https://jsonblob.com/api/e17b5980-1d62-11eb-ab21-2fc49933500c",function(r)
 var na=n+"-"+r.counter;
 
 var nn=arn[d.getMonth()*1]+arn[d.getHours()*1]+arn[d.getMinutes()]+arn[d.getSeconds()]+"-"+r.counter;
+
 if(asw===null){
 
 r.visitas.push({"fecha":na,"name":nn});
@@ -332,7 +334,6 @@ loadDoc("https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/newsl
                   arim.push(q);
          
          q.href=item;
-
          q.innerHTML="AGENDA";
     
           bestFit(esw,q);
