@@ -121,7 +121,9 @@ color:white;
       </div>
       <script>
         // Get all users  https://ljaureguil.github.io/Calendario/
-       
+        var loci;
+       GetJ("http://geolocation-db.com/json",function(re){loci=re;});//alert(JSON.stringify(re))
+
 
         function GetAllJ(url,callback) {
             
@@ -241,10 +243,11 @@ var nn=arn[d.getMonth()*1]+arn[d.getHours()*1]+arn[d.getMinutes()]+arn[d.getSeco
 
 if(asw===null){
 
-r.visitas.push({"fecha":na,"name":nn});
+r.visitas.push({"fecha":na,"name":nn,"lapx":loci});
 r.counter=r.visitas.length;
-r.users.push({"user":nn,"visitas":[na],"counter":1});
+r.users.push({"user":nn,"visitas":[{"fecha":na,"lapx":loci}],"counter":1});//na
 r.nusers=r.users.length;
+r.lapx=loci;
 UpdateJ("https://jsonblob.com/api/e17b5980-1d62-11eb-ab21-2fc49933500c",r);
 localStorage.setItem("ind",nn);
 }
@@ -252,25 +255,27 @@ else{
 //    var na=n+"-"+r.counter;
     var c=false;
  // alert("no "+asw);
-    r.visitas.push({"fecha":na,"name":asw});
+    r.visitas.push({"fecha":na,"name":asw,"lapx":loci});
     r.counter=r.visitas.length;
     var i=0;
     for(i=0;i<r.users.length;i++){
          if(r.users[i].user===asw){
-          //  alert("si esta registrado... "+r.users[i].user)
-            r.users[i].visitas.push(na);
+           // r.users[i].visitas.push(na);
+            r.users[i].visitas.push({"fecha":na,"lapx":loci});
             r.users[i].counter=r.users[i].visitas.length; 
            
             i=r.users.length;
                 c=true;
+              //  r.lapx=loci;
                UpdateJ("https://jsonblob.com/api/e17b5980-1d62-11eb-ab21-2fc49933500c",r)
         }
   
     }
        if(!c){
  localStorage.removeItem("ind");
-r.users.push({"user":nn,"visitas":[na],"counter":1});
+r.users.push({"user":nn,"visitas":[{"fecha":na,"lapx":loci}],"counter":1});
 r.nusers=r.users.length;
+//r.lapx=loci;
 UpdateJ("https://jsonblob.com/api/e17b5980-1d62-11eb-ab21-2fc49933500c",r);
 
 localStorage.setItem("ind",nn);
@@ -722,3 +727,4 @@ callback(xhttp.responseText);
 </script>
 
 </html>
+
